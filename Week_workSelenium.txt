@@ -1,0 +1,301 @@
+Note: practise with code
+
+what are limitations in selenium webdriver
+
+Some limitations of Selenium Automation tool are as follows:
+1. It does not support and non web-based applications, it only supports web based applications.
+2. Its and open source tool so in case of any technical issues you need to rely on the selenium community forums to get your issue resolved.
+3. You need to know at least one of the supported language very well in order to automate your application successfully.
+4. No inbuilt reporting capability so you need plugins like JUnit and TestNG for test reports.
+5. Lot of challenges with IE browser.
+
+installing/configure selenium
+
+To configure Eclipse with Selenium WebDriver, we need to perform the following activities:
+
+Launch the Eclipse IDE & Create a Workspace
+Create a new Project
+Create a new Package
+Create a new Class
+Add External libraries to the project
+
+Link: http://toolsqa.com/selenium-webdriver/configure-eclipse-with-selenium-webdriver/
+
+what are different ways of locating elements in seleniumpackage simple;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
+
+public class DropDownList 
+{
+
+	public static void main(String[] args) throws InterruptedException 
+	{
+		
+		WebDriver d=new FirefoxDriver();
+		Thread.sleep(5000);
+		d.get("http://www.google.com");
+		Thread.sleep(5000);
+		d.navigate().to("http://newtours.demoaut.com");
+		Thread.sleep(5000);
+		d.findElement(By.name("userName")).sendKeys("mahesh");
+		Thread.sleep(5000);
+		d.findElement(By.name("password")).sendKeys("mahesh");
+		Thread.sleep(5000);
+		d.findElement(By.name("login")).click();
+		Thread.sleep(5000);
+		d.findElement(By.xpath("html/body/div/table/tbody/tr/td[2]/table/tbody/tr[4]/td/table/tbody/tr/td[2]/table/tbody/tr[5]/td/form/table/tbody/tr[2]/td[2]/b/font/input[2]")).click();
+		Thread.sleep(5000);
+		d.findElement(By.xpath("html/body/div/table/tbody/tr/td[2]/table/tbody/tr[4]/td/table/tbody/tr/td[2]/table/tbody/tr[5]/td/form/table/tbody/tr[2]/td[2]/b/font/input[1]")).click();
+		Thread.sleep(5000);
+		Select s=new Select(d.findElement(By.name("passCount")));
+		s.selectByValue("3");
+		Thread.sleep(5000);
+		Select s1=new Select(d.findElement(By.name("fromPort")));
+		s1.selectByValue("London");
+		Thread.sleep(5000);
+		Select s2=new Select(d.findElement(By.name("fromMonth")));
+		s2.selectByValue("3");
+		Thread.sleep(5000);
+		Select s3=new Select(d.findElement(By.name("fromDay")));
+		s3.selectByValue("5");
+		Thread.sleep(5000);
+		d.findElement(By.xpath("html/body/div/table/tbody/tr/td[2]/table/tbody/tr[4]/td/table/tbody/tr/td[2]/table/tbody/tr[5]/td/form/table/tbody/tr[9]/td[2]/font/font/input[1]")).click();
+		Thread.sleep(5000);
+		Select s4=new Select(d.findElement(By.name("airline")));
+		s4.selectByIndex(2);
+		Thread.sleep(5000);
+		d.quit();
+
+	}
+
+}
+
+
+
+which is fastest way to identify elements in web page?
+
+Finding web elements with Selenium WebDriver by ID is usually the fastest option, but here is the list of the best and fastest selectors Selenium WebDriver Tests run faster:
+
+ID selectors (By.ID – Matches by @id attribute)
+IDs are the safest, fastest locator option and should always be your first choice
+IDs should be unique in every page according to W3C website
+even if the DOM changes, if the ID is still there, then WebDriver can still locate it
+always try and get extra IDs added into the code, this makes testers life easier
+fastest locator as it uses the document.getElementById() javascript command which is optimised by many browsers
+CSS and Name selectors (Matches by CSS selector or @name attribute)
+faster than XPath
+whenever IDs are not available/ usable, usually @name can be used to identify elements
+CSS and XPath locators are very similar
+not very flexible in identifying elements comparing to XPath
+XPath locators (Matches with arbitrary XPath expression)
+most flexible in order to build reliable web element locators
+very slow locator (particularly in IE) since in order to locate the element it needs to traverse the whole DOM of the page which is a time consuming operation
+
+what is absolute path and relative path in xpath
+
+Absolute XPath
+Absolute XPath starts with the root node or a forward slash (/).
+The advantage of using absolute is, it identifies the element very fast.
+Disadvantage here is, if any thing goes wrong or some other tag added in between, then this path will no longer works.
+
+Example:
+If the Path we defined as
+1. html/head/body/table/tbody/tr/th
+
+If there is a tag that has added between body and table as below
+2. html/head/body/form/table/tbody/tr/th
+
+Ex: d.findElement(By.xpath("html/body/div/table/tbody/tr/td[2]/table/tbody/tr[4]/td/table/tbody/tr/td[2]/table/tbody/tr[5]/td/form/table/tbody/tr[9]/td[2]/font/font/input[1]")).click();
+
+
+Relative Xpath
+A relative xpath is one where the path starts from the node of your choise - it doesn't need to start from the root node.
+
+It starts with Double forward slash(//)
+
+Syntax:
+//table/tbody/tr/th
+
+Advantage of using relative xpath is, you don't need to mention the long xpath, you can start from the middle or in between..
+
+
+
+
+different types of waits or synchronization in selenium webdriver
+Synchronization can be classified into two categories:
+
+1. Unconditional 
+2. Conditional Synchronization
+
+Unconditional :
+In this we just specify timeout value only. We will make the tool to wait until certain amount of time and then proceed further.
+
+Examples: Wait() and Thread.Sleep();
+
+
+how to save screen shots using selenium webdriver
+
+File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+
+how to handle multiple windows in selenium webdriver
+
+package simple;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+public class DoubleBrowser 
+{
+
+	public static void main(String[] args) 
+	{
+		WebDriver d=new FirefoxDriver();
+		d.get("http://www.google.com");
+		d.quit();
+		WebDriver f=new FirefoxDriver();
+		f.get("http://www.facebook.com");
+		f.close();
+		
+	}
+
+}
+
+how to lanuch webpage using chrome driver
+
+package simple;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.Test;
+
+public class Chrome
+{
+	
+public static void main(String[] args) {
+
+System.setProperty("webdriver.gecho.driver", "C:\\chromedriver.exe");
+
+//Initialize browser
+WebDriver driver=new ChromeDriver();
+
+//Open facebook
+driver.get("http://www.facebook.com");
+
+//Maximize browser
+
+driver.manage().window().maximize();
+
+}
+
+}
+
+
+what is desired capabilities in selenium webdriver
+Ex: write code
+
+how to set language while opening website 
+Ex: write code
+
+how to handle windows based popups (upload and dropdown)
+Ex: write code
+
+write code to verify any application login page is working or not
+(u should write code to use textbox, button click events)
+Ex: write code
+
+how to select items from dropdown/select box
+package simple;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
+
+public class DropDownList 
+{
+
+	public static void main(String[] args) throws InterruptedException 
+	{
+		
+		WebDriver d=new FirefoxDriver();
+		Thread.sleep(5000);
+		d.get("http://www.google.com");
+		Thread.sleep(5000);
+		d.navigate().to("http://newtours.demoaut.com");
+		Thread.sleep(5000);
+		d.findElement(By.name("userName")).sendKeys("mahesh");
+		Thread.sleep(5000);
+		d.findElement(By.name("password")).sendKeys("mahesh");
+		Thread.sleep(5000);
+		d.findElement(By.name("login")).click();
+		Thread.sleep(5000);
+		d.findElement(By.xpath("html/body/div/table/tbody/tr/td[2]/table/tbody/tr[4]/td/table/tbody/tr/td[2]/table/tbody/tr[5]/td/form/table/tbody/tr[2]/td[2]/b/font/input[2]")).click();
+		Thread.sleep(5000);
+		d.findElement(By.xpath("html/body/div/table/tbody/tr/td[2]/table/tbody/tr[4]/td/table/tbody/tr/td[2]/table/tbody/tr[5]/td/form/table/tbody/tr[2]/td[2]/b/font/input[1]")).click();
+		Thread.sleep(5000);
+		Select s=new Select(d.findElement(By.name("passCount")));
+		s.selectByValue("3");
+		Thread.sleep(5000);
+		Select s1=new Select(d.findElement(By.name("fromPort")));
+		s1.selectByValue("London");
+		Thread.sleep(5000);
+		Select s2=new Select(d.findElement(By.name("fromMonth")));
+		s2.selectByValue("3");
+		Thread.sleep(5000);
+		Select s3=new Select(d.findElement(By.name("fromDay")));
+		s3.selectByValue("5");
+		Thread.sleep(5000);
+		d.findElement(By.xpath("html/body/div/table/tbody/tr/td[2]/table/tbody/tr[4]/td/table/tbody/tr/td[2]/table/tbody/tr[5]/td/form/table/tbody/tr[9]/td[2]/font/font/input[1]")).click();
+		Thread.sleep(5000);
+		Select s4=new Select(d.findElement(By.name("airline")));
+		s4.selectByIndex(2);
+		Thread.sleep(5000);
+		d.quit();
+
+	}
+
+}
+
+
+how to know if checkbox is checked or not in webpage
+
+tell me code to pass values from parent window to child window
+
+write code to find out if all links are working or not
+Ex: write code
+
+write code on how to use javascriptexecutor?
+Ex: write code
+
+difference between assert and verify?
+Ex: write code
+
+difference between driver.close and driver.quit methods?
+Ex: write code
+
+common exceptions in selenium?
+Ex: write code
+
+how to handle Ajax calls in selenium?
+Ex: write code
+
+we have webtable, need to click on second row from table.
+when we click on child will be populated. first column in primary column for each row.
+tell me steps to verify child form has proper data or not
+Ex: 
+
+How to assign the value to textbox other than sendkeys method?
+
+Selenium grid, how to execute scripts on multiple browser
+
+Write code for drag/drop in selenium
+
+Write code for right click in seelnium
+
+Write code fro scroll to specific element
+
+
+
